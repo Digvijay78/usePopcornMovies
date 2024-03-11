@@ -2,12 +2,12 @@ import React from 'react'
 import { useState } from 'react';
 import Movie from './Movie';
 
-const MovieList = ({movies}) => {
+const MovieList = ({movies , handleSelectedId}) => {
     
   return (
-    <ul className="list">
+    <ul className="list list-movies">
     {movies?.map((movie) => (
-       <Movie movie ={movie} key={movie.imdbID} />
+       <Movie movie ={movie} key={movie.imdbID} handleSelectedId={handleSelectedId} />
     ))}
   </ul>
   )
