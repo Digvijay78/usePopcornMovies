@@ -46,7 +46,7 @@ const MovieDetails = ({ selectedId, onCloseMovie, onAddWatched , watched}) => {
       setMovieDeatails(data);
       setIsLoading(false);
     }
-
+    
     fetchMoviesDetails();
   }, [selectedId]);
 
@@ -58,6 +58,21 @@ const MovieDetails = ({ selectedId, onCloseMovie, onAddWatched , watched}) => {
       document.title = 'usePopcorn';
     };
   },[title])
+
+  useEffect(function () {
+    function callBack(e) {
+      if(e.code === "Escape"){
+        onCloseMovie();
+      }
+    }
+       document.addEventListener("keydown", callBack)
+
+       return function () {
+
+         document.removeEventListener("keydown", callBack)
+       }
+    
+  }, [onCloseMovie]);
 
   return (
     <div className="details">
