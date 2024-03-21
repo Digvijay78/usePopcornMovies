@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Loader from "./Loader";
+import { useKey } from "./useKey";
 const KEY = "f45acb30";
 
 const MovieDetails = ({ selectedId, onCloseMovie, onAddWatched , watched}) => {
@@ -59,20 +60,7 @@ const MovieDetails = ({ selectedId, onCloseMovie, onAddWatched , watched}) => {
     };
   },[title])
 
-  useEffect(function () {
-    function callBack(e) {
-      if(e.code === "Escape"){
-        onCloseMovie();
-      }
-    }
-       document.addEventListener("keydown", callBack)
-
-       return function () {
-
-         document.removeEventListener("keydown", callBack)
-       }
-    
-  }, [onCloseMovie]);
+   useKey("Escape",onCloseMovie )
 
   return (
     <div className="details">
@@ -82,7 +70,7 @@ const MovieDetails = ({ selectedId, onCloseMovie, onAddWatched , watched}) => {
         <>
           <header>
             <button className="btn-back" onClick={onCloseMovie}>
-              &larr;{" "}
+              &larr;
             </button>
             <img src={poster} alt={`poster of ${movieDetails} movie`} />
             <div className="details-overview">
